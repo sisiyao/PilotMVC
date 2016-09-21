@@ -1,9 +1,10 @@
-require_relative 'db_connection'
+require_relative '../config/db_connection'
 require 'active_support/inflector'
-# NB: the attr_accessor we wrote in phase 0 is NOT used in the rest
-# of this project. It was only a warm up.
+require_relative 'associations'
 
-class SQLObject
+class ModelBase
+  extend Associations
+
   def self.columns
     query = <<-SQL
       SELECT *
@@ -68,6 +69,19 @@ class SQLObject
     result.empty? ? nil : self.new(result.first)
   end
 
+  def self.where(params)
+    where_line = params.keys.map { |key| "#{key} = ?" }
+    where_values = params.values
+
+    results = DBConnection.execute(<<-SQL, *where_values)
+      SELECT *
+      FROM #{self.table_name}
+      WHERE #{where_line.join(" AND ")}
+    SQL
+
+    parse_all(results)
+  end
+
   def initialize(params = {})
     params.each do |attr_name, attr_value|
       raise "unknown attribute '#{attr_name}'" unless self.class.columns.include?(attr_name.to_sym)
@@ -88,12 +102,10 @@ class SQLObject
 
   #make this private later
   def insert
-    cols = self.class.columns.dup
-    cols.delete(:id)
+    cols = self.class.columns.drop(1)
     col_names = cols.join(", ")
     question_marks = (["?"] * cols.count).join(", ")
-    values = attribute_values
-    values.delete(nil)
+    values = attribute_values.drop(1)
 
     DBConnection.execute(<<-SQL, *values)
       INSERT INTO #{self.class.table_name} (#{col_names})
@@ -105,15 +117,12 @@ class SQLObject
 
   #make this private later???
   def update
-    cols = self.class.columns.dup
-    cols.delete(:id)
+    cols = self.class.columns.drop(1)
     set = cols.map { |col| "#{col} = ?"}.join(", ")
 
-    values = attribute_values
-    values.delete(self.id)
-    values << self.id
+    values = attribute_values.drop(1)
 
-    DBConnection.execute(<<-SQL, *values)
+    DBConnection.execute(<<-SQL, *values, self.id)
       UPDATE #{self.class.table_name}
       SET #{set}
       WHERE id = ?
