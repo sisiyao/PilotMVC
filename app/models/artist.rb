@@ -3,6 +3,7 @@ require_relative '../../lib/model_base'
 class Artist < ModelBase
   finalize!
   has_many :albums
+  has_many_through :tracks, :albums, :tracks
 
   def valid?
     valid = true
