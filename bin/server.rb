@@ -1,18 +1,14 @@
 require 'rack'
-require_relative '../lib/controller_base'
 require_relative '../lib/router'
-require_relative '../lib/static'
 require_relative '../lib/show_exceptions'
-
-class MyController < ControllerBase
-  def go
-    render_content("Hello from the controller", "text/html")
-  end
-end
+require_relative '../app/controllers/artists_controller'
 
 router = Router.new
 router.draw do
-  get Regexp.new("^/$"), MyController, :go
+  get Regexp.new("^/$"), ArtistsController, :index
+  get Regexp.new("^/artists/new$"), ArtistsController, :new
+  get Regexp.new("^/artists/(?<id>\\d+)$"), ArtistsController, :show
+  post Regexp.new("^/artists$"), ArtistsController, :create
 end
 
 app = Proc.new do |env|
@@ -23,7 +19,7 @@ app = Proc.new do |env|
 end
 
 app = Rack::Builder.new do
-  use Static
+  use ShowExceptions
   run app
 end.to_app
 

@@ -6,6 +6,7 @@
       border: 0;
       font-family: sans-serif;
     }
+    
     .error-title {
       border: 0;
       background-color: black;
@@ -63,12 +64,12 @@
   <div class='error-title'>Runtime Error</div>
   <div class='error-section'>
     <div class='error-header'>Error Message</div>
-    <div class='error-message'><%= e.message %></div>
+    <div class='error-message'><%= error_message %></div>
   </div>
   <div class='error-section'>
     <div class='error-header'>Stack Trace</div>
     <ul class='backtrace'>
-      <% e.backtrace.each do |line| %>
+      <% stacktrace.each do |line| %>
         <li class='error-content'><%= line %></li>
       <% end %>
     </ul>

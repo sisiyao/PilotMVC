@@ -13,10 +13,6 @@ class ModelBase
     @col ||= DBConnection.execute2(query).first.map(&:to_sym)
   end
 
-  # iterate through all columns in the table and define setter and getter methods for each.
-  # store everything in the attributes hash.
-  # it's important that the user of SQLObject call finalize! at the end
-  # of their subclass definition, otherwise the getter/setter methods don't get defined.
   def self.finalize!
     self.columns.each do |col|
       define_method (col) do
@@ -29,15 +25,10 @@ class ModelBase
     end
   end
 
-  #allows users to set the table name themselves
-  #stores table_name as an instance variable on SQLObject. model classes will
-  #eventually inherit from SQLObject, so table_name will be an instance variable on the class
   def self.table_name=(table_name)
     @table_name = table_name
   end
 
-  #will set the table name using activesupport inflector library (part of rails)
-  #if not already set
   def self.table_name
     @table_name ||= "#{self}".tableize
   end
@@ -90,8 +81,6 @@ class ModelBase
     end
   end
 
-  # ActiveRecord::Base gives us a handy method #attributes that hands
-  # us a hash of all our model's columns and values.
   def attributes
     @attributes ||= {}
   end
@@ -100,7 +89,6 @@ class ModelBase
     self.class.columns.map { |col_name| send(col_name) }
   end
 
-  #make this private later
   def insert
     cols = self.class.columns.drop(1)
     col_names = cols.join(", ")
@@ -115,7 +103,6 @@ class ModelBase
     self.id = DBConnection.last_insert_row_id
   end
 
-  #make this private later???
   def update
     cols = self.class.columns.drop(1)
     set = cols.map { |col| "#{col} = ?"}.join(", ")
@@ -130,6 +117,11 @@ class ModelBase
   end
 
   def save
+    return false unless valid?
     self.id.nil? ? insert : update
+  end
+
+  def errors
+    @errors ||= []
   end
 end

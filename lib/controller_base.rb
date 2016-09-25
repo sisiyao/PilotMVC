@@ -4,7 +4,6 @@ require 'active_support/core_ext'
 require 'erb'
 require_relative './session'
 require_relative './flash'
-require 'byebug'
 
 class ControllerBase
   attr_reader :req, :res, :params, :protect
@@ -42,7 +41,7 @@ class ControllerBase
   def render(template_name)
     controller_name = self.class.to_s.underscore
     curr_dir = File.expand_path(File.dirname(__FILE__))
-    path_to_template = "#{curr_dir}/../views/#{controller_name}/#{template_name}.html.erb"
+    path_to_template = "#{curr_dir}/../app/views/#{controller_name}/#{template_name}.html.erb"
 
     template_code = File.read(path_to_template)
     erb_contents = ERB.new(template_code).result(binding)
