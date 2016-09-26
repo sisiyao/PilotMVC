@@ -1,48 +1,7 @@
 require 'active_support/inflector'
-
-class AssocOptions
-  attr_accessor(
-    :foreign_key,
-    :class_name,
-    :primary_key
-  )
-
-  def model_class
-    @class_name.constantize
-  end
-
-  def table_name
-    model_class.table_name
-  end
-end
-
-class BelongsToOptions < AssocOptions
-  def initialize(name, options = {})
-    defaults = {
-      foreign_key: "#{name}_id".to_sym,
-      primary_key: :id,
-      class_name: name.to_s.camelcase
-    }.merge(options)
-
-    @foreign_key = defaults[:foreign_key]
-    @primary_key = defaults[:primary_key]
-    @class_name = defaults[:class_name]
-  end
-end
-
-class HasManyOptions < AssocOptions
-  def initialize(name, self_class_name, options = {})
-    defaults = {
-      foreign_key: "#{self_class_name.downcase}_id".to_sym,
-      primary_key: :id,
-      class_name: name.to_s.downcase.singularize.camelcase
-    }.merge(options)
-
-    @foreign_key = defaults[:foreign_key]
-    @primary_key = defaults[:primary_key]
-    @class_name = defaults[:class_name]
-  end
-end
+require_relative './assoc_options'
+require_relative './assoc_options_belongsto'
+require_relative './assoc_options_hasmany'
 
 module Associations
   def belongs_to(name, options = {})

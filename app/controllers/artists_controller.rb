@@ -13,7 +13,7 @@ class ArtistsController < ControllerBase
   def show
     @artist = Artist.find(params["id"].to_i)
     @albums = @artist.albums
-    p @tracks = @artist.tracks
+    @tracks = @artist.tracks
   end
 
   def new

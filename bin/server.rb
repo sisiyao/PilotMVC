@@ -3,6 +3,7 @@ require_relative '../lib/router'
 require_relative '../lib/show_exceptions'
 require_relative '../lib/static'
 require_relative '../app/controllers/artists_controller'
+require_relative '../app/controllers/albums_controller'
 
 router = Router.new
 router.draw do
@@ -13,6 +14,11 @@ router.draw do
   get Regexp.new("^/artists/(?<id>\\d+)/edit$"), ArtistsController, :edit
   patch Regexp.new("^/artists/(?<id>\\d+)$"), ArtistsController, :update
   delete Regexp.new("^/artists/(?<id>\\d+)$"), ArtistsController, :destroy
+  get Regexp.new("^/albums/new$"), AlbumsController, :new
+  post Regexp.new("^/albums$"), AlbumsController, :create
+  get Regexp.new("^/albums/(?<id>\\d+)/edit$"), AlbumsController, :edit
+  patch Regexp.new("^/albums/(?<id>\\d+)$"), AlbumsController, :update
+  delete Regexp.new("^/albums/(?<id>\\d+)$"), AlbumsController, :destroy
 end
 
 app = Proc.new do |env|
