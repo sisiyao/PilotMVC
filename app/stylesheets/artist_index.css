@@ -1,10 +1,3 @@
-body, h1, h2, div, img, a {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: sans-serif;
-}
-
 h1 {
   font-size: 40px;
   text-align: center;
@@ -57,41 +50,4 @@ img {
 
 .artist:hover h2 {
   color: black;
-}
-
-.header {
-  width: 100%;
-  height: 72px;
-  margin: 0 auto;
-  background-color: #abb3ed;
-  text-align: center;
-  position: fixed;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-}
-
-.header > div {
-  margin: 0 35px;
-}
-
-.filler {
-  height: 85px;
-}
-
-.button {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.button > a:link, .button > a:visited {
-  text-decoration: none;
-  color: black;
-}
-
-.button > a:hover {
-  cursor: pointer;
-  color: white;
 }

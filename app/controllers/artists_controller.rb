@@ -1,5 +1,7 @@
 require_relative '../../lib/controller_base'
 require_relative '../models/artist'
+require_relative '../models/album'
+require_relative '../models/track'
 
 class ArtistsController < ControllerBase
   protect_from_forgery
@@ -10,6 +12,8 @@ class ArtistsController < ControllerBase
 
   def show
     @artist = Artist.find(params["id"].to_i)
+    @albums = @artist.albums
+    p @tracks = @artist.tracks
   end
 
   def new
@@ -41,6 +45,8 @@ class ArtistsController < ControllerBase
   end
 
   def destroy
-
+    @artist = Artist.find(params["id"].to_i)
+    @artist.destroy
+    redirect_to "/artists"
   end
 end

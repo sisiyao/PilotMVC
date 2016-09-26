@@ -60,8 +60,8 @@ module Associations
     assoc_options[name] = HasManyOptions.new(name, self.name, options)
 
     define_method(name) do
-      assoc_options[name].model_class
-        .where(options.foreign_key => send(assoc_options[name].primary_key))
+      self.class.assoc_options[name].model_class
+        .where(self.class.assoc_options[name].foreign_key => send(self.class.assoc_options[name].primary_key))
     end
   end
 

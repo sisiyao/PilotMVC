@@ -1,13 +1,13 @@
 <head>
-  <head>
-    <link rel="stylesheet" href="/stylesheets/artist_form.css" type="text/css">
-  </head>
+  <link rel="stylesheet" href="/stylesheets/reset.css" type="text/css">
+  <link rel="stylesheet" href="/stylesheets/header.css" type="text/css">
+  <link rel="stylesheet" href="/stylesheets/artist_form.css" type="text/css">
 </head>
 
 <body>
   <div class="header">
     <div class="button"><a href="/artists">MyMusicApp [built with Ruby on Pilot framework]</a></div>
-    <div class="button"><a href="/artists">Cancel</a></div>
+    <div class="button"><a href="/artists/<%= @artist.id %>">Cancel</a></div>
   </div>
 
   <div class="filler"></div>

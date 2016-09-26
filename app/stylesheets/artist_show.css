@@ -1,0 +1,35 @@
+h1 {
+  font-size: 40px;
+  text-align: center;
+  padding: 30px 20px 0 20px;
+}
+
+.artist-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.artist-options-link {
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+  min-width: 70px;
+  max-width: 70px;
+  border-radius: 5px;
+  color: blue;
+}
+
+.artist-options-link-container {
+  margin: 20px 10px;
+}
+
+.artist-options-link:hover {
+  cursor: pointer;
+  background-color: #e2e2e2;
+}
