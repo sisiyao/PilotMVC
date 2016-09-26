@@ -9,7 +9,14 @@ class Route
   end
 
   def matches?(req)
-    self.url_pattern =~ req.path && self.http_method == req.request_method.downcase.to_sym
+    if req.params["_method"] && req.params["_method"].downcase == "patch"
+      req_method = :patch
+    elsif req.params["_method"] && req.params["_method"].downcase == "delete"
+      req_method = :delete
+    else
+      req_method = req.request_method.downcase.to_sym
+    end
+    self.url_pattern =~ req.path && self.http_method == req_method
   end
 
   def run(req, res)

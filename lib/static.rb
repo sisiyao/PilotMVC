@@ -9,14 +9,13 @@ class Static
     req = Rack::Request.new(env)
     res = Rack::Response.new
 
-    if /^\/public(\/\w+)*\/\w+(\.jpg$|\.png$|\.zip$|\.txt$)/.match(req.path)
+    if /^\/stylesheets(\/\w+)*\/\w+(\.css$)/.match(req.path)
       curr_dir = File.expand_path(File.dirname(__FILE__))
-      path_to_asset = "#{curr_dir}/..#{req.path}"
+      path_to_asset = "#{curr_dir}/../app#{req.path}"
 
       if File.exists?(path_to_asset)
         file = File.read(path_to_asset)
-        #need to build a switch statement
-        res['Content-type'] = 'image/png'
+        res['Content-type'] = 'text/css'
         res.write(file)
         res.finish
       else

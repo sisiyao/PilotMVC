@@ -9,7 +9,7 @@ class ArtistsController < ControllerBase
   end
 
   def show
-    @artist = Artist.find(params[:id])
+    @artist = Artist.find(params["id"].to_i)
   end
 
   def new
@@ -27,11 +27,11 @@ class ArtistsController < ControllerBase
   end
 
   def edit
-    @artist = Artist.find(params[:id])
+    @artist = Artist.find(params["id"].to_i)
   end
 
   def update
-    @artist = Artist.find(params[:id])
+    @artist = Artist.find(params["id"].to_i)
     if @artist.update(params["artist"])
       redirect_to "/artists"
     else
