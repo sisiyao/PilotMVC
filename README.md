@@ -38,11 +38,13 @@ Here is an example app I built on top of this framework. [Link to the Github is 
 
 To create a model, add a file under `app/models` and use the following starting code to inherit `ModelBase` functionality:
 
+  ```Ruby
   require_relative '../../lib/model_base'
 
   class Album < ModelBase
     finalize!
   end
+  ```
 
 ### `ControllerBase`
 
