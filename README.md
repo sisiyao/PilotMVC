@@ -18,7 +18,7 @@ Framework dependencies:
 
 ## Example App
 
-Here is an example app I built on top of this framework. [Link to the Github is here](https://github.com/sisiyao/RubyOnPilotExample).
+Here is a demo app that I built on top of this framework. [Link to the Github](https://github.com/sisiyao/RubyOnPilotExample).
 
 ![MusicApp preview](musicapp.png)
 
@@ -80,7 +80,7 @@ Methods available for use controller classes include:
 
 ### `Views`
 
-Users should create view under `lib/views/`. Views must be organized into controller class folders. For example:
+Users should create views under `lib/views/`. Views must be organized into controller class folders. For example:
 - app (folder)
   - views (folder)
     - users_controller (folder)
@@ -93,7 +93,7 @@ Users should create view under `lib/views/`. Views must be organized into contro
 
 ### `Router & Routes`
 
-Upon starting the server, the framework will instantiate a Router object that is responsible for creating Routes. When an HTTP request comes in, the Router will match the reqest to the correct Route, instantiate the Controller associated with that, and tell the Controller to invoke the correct action.
+Upon starting the server, the framework will instantiate a Router object that is responsible for creating Routes. When an HTTP request comes in, the Router will match the reqest to the correct Route, instantiate the Controller associated with that Route, and tell the Controller to invoke the correct action.
 
 Users must create routes in the `bin/server.rb` file under:
 ```Ruby
@@ -124,7 +124,7 @@ Ruby on Pilot supports GET, POST, PATCH, and DELETE HTTP methods. View the sourc
 
 * `Session`: Reads and passes the session token via a cookie in every request / response cycle.
 * `Flash`: Passes data via a flash cookie that persists for one cycle only.
-* `Flash.now`: Stores data that is available in the current cycle only and does not persist to future cycles.
+* `Flash.now`: Stored data is available in the current cycle only and does not persist to future cycles.
 
 Example of `flash.now` used for displaying error messages:
 ```Ruby
@@ -142,7 +142,7 @@ Example of `flash.now` used for displaying error messages:
 
 ### `CSRF Protection`
 
-CSRF protection is also available via the `::protect_from_forgery` and `#form_authenticity_token` methods in `ControllerBase`.
+CSRF protection is available via the `::protect_from_forgery` and `#form_authenticity_token` methods in `ControllerBase`.
 
 To use built in CSRF protection in this framework, add the `::protect_from_forgery` method to your controller classes and the `#form_authenticity_token` in your html forms. For example:
 ```Ruby
@@ -161,7 +161,7 @@ To use built in CSRF protection in this framework, add the `::protect_from_forge
 
 ### `Runtime error handling`
 
-Rack middleware will catch and display runtime errors with the error message, a stacktrace, and a preview of the error's source code. Currently functionality of this middleware does work with errors caught in `.erb` files.
+Rack middleware will catch and display runtime errors with the error message, a stacktrace, and a preview of the error's source code. Currently, this middleware does work for errors caught in `.erb` files.
 
 ![Runtime error](runtime_error.png)
 
@@ -170,7 +170,7 @@ View the source code for this middleware under `lib/show_exceptions.rb`.
 
 ### `Static CSS Assets`
 
-The Ruby on Pilot framework will serve up css stylesheets with a Rack middleware for static assets. To use this feature, create your css files under `app/stylesheets/` and link the relevant stylesheets in your html view files using like so:
+The Ruby on Pilot framework will serve up css stylesheets with a Rack middleware for static assets. To use this feature, create your css files under `app/stylesheets/` and link the relevant stylesheets in your html view files like so:
 ```html
   <head>
     <link rel="stylesheet" href="/stylesheets/reset.css" type="text/css">
@@ -187,3 +187,4 @@ Plans for additional features include:
 * Implement a Relations class that allows method chaining and lazy evaluation for ORM methods
 * Implement a 'pilot new' command similar to 'rails new'
 * Turn framework into a Ruby gem
+* Expand static assets middleware to work with other assets besides css files
