@@ -114,13 +114,13 @@
   </div>
 
   <div class="filler"></div>
-  <h1>New Artist Form</h1>
+  <h1>Edit Artist</h1>
   <div class="errors"><%= flash[:errors].join(", ") if flash[:errors] %></div>
   <div class="form">
-    <form action="/artists" method="POST">
+    <form action="/artists/<%= @artist.id %>" method="PATCH">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input class="input" type="text" name="artist[name]" placeholder="Name">
-      <input class="input" type="text" name="artist[image_url]" placeholder="Image URL">
+      <input class="input" type="text" name="artist[name]" placeholder="Name" value="<%= @artist.name %>">
+      <input class="input" type="text" name="artist[image_url]" placeholder="Image URL" value="<%= @artist.image_url %>">
       <input class="submit" type="submit" value="Submit">
     </form>
   </div>

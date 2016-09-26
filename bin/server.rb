@@ -5,7 +5,7 @@ require_relative '../app/controllers/artists_controller'
 
 router = Router.new
 router.draw do
-  get Regexp.new("^/$"), ArtistsController, :index
+  get Regexp.new("^/artists$"), ArtistsController, :index
   get Regexp.new("^/artists/new$"), ArtistsController, :new
   get Regexp.new("^/artists/(?<id>\\d+)$"), ArtistsController, :show
   post Regexp.new("^/artists$"), ArtistsController, :create

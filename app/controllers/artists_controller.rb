@@ -19,15 +19,25 @@ class ArtistsController < ControllerBase
   def create
     @artist = Artist.new(params["artist"])
     if @artist.save
-      redirect_to "/"
+      redirect_to "/artists"
     else
       flash.now[:errors] = @artist.errors
       render :new
     end
   end
 
-  def update
+  def edit
+    @artist = Artist.find(params[:id])
+  end
 
+  def update
+    @artist = Artist.find(params[:id])
+    if @artist.update(params["artist"])
+      redirect_to "/artists"
+    else
+      flash.now[:errors] = @artist.errors
+      render :edit
+    end
   end
 
   def destroy

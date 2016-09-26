@@ -103,10 +103,12 @@ class ModelBase
     self.id = DBConnection.last_insert_row_id
   end
 
-  def update
+  def update(params = {})
+    params.each { |col, val| attributes[col.to_sym] = val }
+    return false unless valid?
+
     cols = self.class.columns.drop(1)
     set = cols.map { |col| "#{col} = ?"}.join(", ")
-
     values = attribute_values.drop(1)
 
     DBConnection.execute(<<-SQL, *values, self.id)

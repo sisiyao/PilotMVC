@@ -36,7 +36,7 @@ class ShowExceptions
   end
 
   def source_code(curr_dir)
-    backtrace_file_line = @e.backtrace[0]
+    backtrace_file_line = File.expand_path(@e.backtrace[0])
     file_dir = /.*\.rb/.match(backtrace_file_line).to_s
     line_num = /\.rb:\d+/.match(backtrace_file_line).to_s[4..-1].to_i
     file_lines = File.readlines(file_dir)[(line_num - 4)..(line_num + 2)]

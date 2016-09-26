@@ -6,7 +6,7 @@
       border: 0;
       font-family: sans-serif;
     }
-    
+
     .error-title {
       border: 0;
       background-color: black;
@@ -70,7 +70,7 @@
     <div class='error-header'>Stack Trace</div>
     <ul class='backtrace'>
       <% stacktrace.each do |line| %>
-        <li class='error-content'><%= line %></li>
+        <li class='error-content'><%= File.expand_path(line) %></li>
       <% end %>
     </ul>
   </div>
