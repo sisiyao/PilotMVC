@@ -1,12 +1,12 @@
-## Pilot MVC
+## Ruby on Pilot
 
 ### Background
 
-Pilot MVC is a fleshed out version of Rails Lite and ActiveRecord Lite that will function as a lightweight MVC framework for building web apps with Ruby.
+Ruby on Pilot is a fleshed out version of Rails Lite and ActiveRecord Lite that will function as a lightweight MVC framework for building web apps with Ruby.
 
 ### Functionality & MVP
 
-The Pilot MVC framework will have the following functionalities:
+The Ruby on Pilot framework will have the following functionalities:
 
 - [ ] Object relational mapping between Ruby and SQL database
 - [ ] Ability to create models, controllers, and routes
@@ -16,7 +16,7 @@ The Pilot MVC framework will have the following functionalities:
 
 ### Technologies
 
-Pilot MVC will be built using Ruby and Rack. The core of the project will be built on top of the Rails Lite and ActiveRecord Lite projects during the course curriculum, but will have additional and expanded bonus features including like the 'rails new' command and ability to handle PATCH and DELETE requests.
+Ruby on Pilot will be built using Ruby and Rack. The core of the project will be built on top of the Rails Lite and ActiveRecord Lite projects during the course curriculum, but will have additional and expanded bonus features including the 'has_many_through' method and ability to handle PATCH and DELETE requests.
 
 ### Implementation Timeline
 
@@ -40,10 +40,9 @@ Pilot MVC will be built using Ruby and Rack. The core of the project will be bui
 - Middleware for tracing errors in the stack
 - Middleware for serving up static assets
 - CSRF protection
-- Ability to run a 'rails new'-like command
 
 **Day 4**: Test implementation all aspects of the framework. Write user instructions for how to use the framework. By the end of the day:
 
 - Test that all methods work as intended and actually create a working web app with correct functionalities
-- Production README with instructions for how to user the framework to build a web app
+- Production README with instructions for how to use the framework to build a web app
 - BONUS: make the web app that I build with the framework more presentable to include as an example of using this framework
